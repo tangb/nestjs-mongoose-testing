@@ -3,6 +3,7 @@ import { Test } from '@nestjs/testing';
 import { TestModule } from './test.module';
 import { TestService } from './test.service';
 import { Test1, Test1Document } from './test1.schema';
+import { Test2 } from './test2.schema';
 
 const mockModel = {
   create: jest.fn(),
@@ -20,6 +21,10 @@ describe('TestService', () => {
       providers: [
         {
           provide: getModelToken(Test1.name),
+          useFactory: () => mockModel,
+        },
+        {
+          provide: getModelToken(Test2.name),
           useFactory: () => mockModel,
         },
       ],
